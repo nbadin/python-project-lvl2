@@ -13,19 +13,15 @@ def generate_diff(first_path, second_path):
     first_file = get_file(first_path)
     second_file = get_file(second_path)
     for key in sorted(set([*first_file.keys(), *second_file.keys()])):
-        if key in first_file and key in second_file:
-            if first_file[key] != second_file[key]:
-                result.append(f'  - {key}: {first_file[key]}')
-                result.append(f'  + {key}: {second_file[key]}')
-            if first_file[key] == second_file[key]:
-                result.append(f'    {key}: {first_file[key]}')
         if key in first_file and key not in second_file:
             result.append(f'  - {key}: {first_file[key]}')
         if key not in first_file and key in second_file:
             result.append(f'  + {key}: {second_file[key]}')
+        if key in first_file and key in second_file:
+            if first_file[key] != second_file[key]:
+                result.append(f'  - {key}: {first_file[key]}')
+                result.append(f'  + {key}: {second_file[key]}')
+            else:
+                result.append(f'    {key}: {first_file[key]}')
 
-    
     return '\n'.join(['{', *result, '}'])
-
-
-    
