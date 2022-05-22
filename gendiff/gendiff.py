@@ -3,6 +3,7 @@ import pathlib
 import yaml
 from gendiff.build_ast import build_ast
 from gendiff.format.default import stylish
+from gendiff.format.plain import plain
 
 
 def get_file(file_name):
@@ -20,3 +21,5 @@ def generate_diff(first_path, second_path, format='stylish'):
     second_file = get_file(second_path)
     if format == 'stylish':
         return stylish(build_ast(first_file, second_file))
+    if format == 'plain':
+        return plain(build_ast(first_file, second_file))
