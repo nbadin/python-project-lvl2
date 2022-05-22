@@ -1,27 +1,22 @@
 import json
 import pathlib
+import yaml
+from gendiff.build_ast import build_ast
+from gendiff.format.default import stylish
 
 
 def get_file(file_name):
     ext = pathlib.Path(file_name).suffix
     if ext == '.json':
         return json.load(open(file_name))
+    if ext == '.yaml' or ext == '.yml':
+        return yaml.safe_load(open(file_name))
+    else:
+        raise Exception('Unsupported output format')
 
 
-def generate_diff(first_path, second_path):
-    result = []
+def generate_diff(first_path, second_path, format='stylish'):
     first_file = get_file(first_path)
     second_file = get_file(second_path)
-    for key in sorted(set([*first_file.keys(), *second_file.keys()])):
-        if key in first_file and key not in second_file:
-            result.append(f'  - {key}: {first_file[key]}')
-        if key not in first_file and key in second_file:
-            result.append(f'  + {key}: {second_file[key]}')
-        if key in first_file and key in second_file:
-            if first_file[key] != second_file[key]:
-                result.append(f'  - {key}: {first_file[key]}')
-                result.append(f'  + {key}: {second_file[key]}')
-            else:
-                result.append(f'    {key}: {first_file[key]}')
-
-    return '\n'.join(['{', *result, '}'])
+    if format == 'stylish':
+        return stylish(build_ast(first_file, second_file))
