@@ -4,6 +4,7 @@ import yaml
 from gendiff.build_ast import build_ast
 from gendiff.format.default import stylish
 from gendiff.format.plain import plain
+from gendiff.format.json import render
 
 
 def get_file(file_name):
@@ -23,3 +24,5 @@ def generate_diff(first_path, second_path, format='stylish'):
         return stylish(build_ast(first_file, second_file))
     if format == 'plain':
         return plain(build_ast(first_file, second_file))
+    if format == 'json':
+        return render(build_ast(first_file, second_file))
