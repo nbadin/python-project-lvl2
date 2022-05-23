@@ -12,13 +12,7 @@ def expected_stylish():
     return ''.join(expected)
 
 
-def test_gendiff_with_json(expected_stylish):
+def test_gendiff_stylish(expected_stylish):
     assert generate_diff('./tests/fixtures/file1.json', './tests/fixtures/file2.json') == expected_stylish
-
-
-def test_gendiff_with_yaml(expected_stylish):
     assert generate_diff('./tests/fixtures/file1.yaml', './tests/fixtures/file2.yml') == expected_stylish
-
-
-def test_gendiff_with_json_and_yaml(expected_stylish):
     assert generate_diff('./tests/fixtures/file1.yaml', './tests/fixtures/file2.json', 'stylish') == expected_stylish
