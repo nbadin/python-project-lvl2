@@ -14,6 +14,11 @@ Program compares two structures of json or yaml files and displays the differenc
 1. Install dependencies **make install**
 1. And install the packege **make build & make package-install**
 
+
+##### Gendiff help
+[![asciicast](https://asciinema.org/a/496676.svg)](https://asciinema.org/a/496676)
+
+
 ##### Comparison of files, json-like output format (default):
 [![asciicast](https://asciinema.org/a/496650.svg)](https://asciinema.org/a/496650)
 
