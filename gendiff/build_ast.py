@@ -9,7 +9,7 @@ def build_ast(first_file, second_file):  # noqa: C901
             diff[key] = (REMOVED, first_file[key])
         elif key not in first_file:
             diff[key] = (ADDED, second_file[key])
-        elif (isinstance(first_file[key], dict) and
+        elif (isinstance(first_file[key], dict) and 
                 isinstance(second_file[key], dict)):
             diff[key] = (NESTED, build_ast(first_file[key], second_file[key]))
         elif first_file[key] != second_file[key]:
