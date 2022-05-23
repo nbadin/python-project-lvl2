@@ -11,8 +11,8 @@ Program compares two structures of json or yaml files and displays the differenc
 ### Install
 1. Install the latest python and poetry to the system
 1. Download this project repository locally
-1. Install dependencies ** make install **
-1. And install the packege ** make build & make package-install **
+1. Install dependencies **make install**
+1. And install the packege **make build & make package-install**
 
 ### Comparison of files, json-like output format (default):
 [![asciicast](https://asciinema.org/a/496650.svg)](https://asciinema.org/a/496650)
