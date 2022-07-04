@@ -1,8 +1,8 @@
-from gendiff.constants import (
+from gendiff.statuses import (
     ADDED,
+    MODIFIED,
     REMOVED,
-    NESTED,
-    MODIFIED
+    NESTED
 )
 
 

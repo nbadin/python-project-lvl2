@@ -1,10 +1,11 @@
-from gendiff.constants import (
+from gendiff.statuses import (
     ADDED,
-    REMOVED,
-    NESTED,
     MODIFIED,
-    EQUAL
+    REMOVED,
+    EQUAL,
+    NESTED
 )
+
 
 STATUSES = {
     ADDED: '  + ',

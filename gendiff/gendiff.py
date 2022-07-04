@@ -1,10 +1,16 @@
 import json
 import pathlib
 import yaml
-from gendiff.build_ast import build_ast
 from gendiff.format.default import stylish
 from gendiff.format.plain import plain
 from gendiff.format.json import render
+from gendiff.statuses import (
+    ADDED,
+    MODIFIED,
+    REMOVED,
+    EQUAL,
+    NESTED
+)
 
 
 def get_file(file_name):
@@ -26,3 +32,21 @@ def generate_diff(first_path, second_path, format='stylish'):
         return plain(build_ast(first_file, second_file))
     if format == 'json':
         return render(build_ast(first_file, second_file))
+
+
+def build_ast(first_file, second_file):  # noqa: C901
+    diff = {}
+    keys = sorted(first_file.keys() | second_file.keys())
+    for key in keys:
+        if key not in second_file:
+            diff[key] = (REMOVED, first_file[key])
+        elif key not in first_file:
+            diff[key] = (ADDED, second_file[key])
+        elif (isinstance(first_file[key], dict) and  # noqa: W504
+                isinstance(second_file[key], dict)):
+            diff[key] = (NESTED, build_ast(first_file[key], second_file[key]))
+        elif first_file[key] != second_file[key]:
+            diff[key] = (MODIFIED, first_file[key], second_file[key])
+        elif first_file[key] == second_file[key]:
+            diff[key] = (EQUAL, first_file[key])
+    return diff
