@@ -17,7 +17,7 @@ STATUSES = {
 
 def stylish(diff, depth=0):
     result = []
-    indent = '    ' * depth
+    indent = '     ' * depth
 
     for key, data in diff.items():
         status, value = data[0], data[1:]
